@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import AddToList from "./components/AddToList";
+import List from "./components/List";
+
+// interface in typescript
+export interface IState {
+  people: {
+    name: string;
+    age: number;
+    img: string;
+    note?: string;
+  }[];
+}
 
 function App() {
+  const [people, setPeople] = useState<IState["people"]>([
+    {
+      name: "Tony Stark",
+      age: 52,
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlA8OaFAFD3Sl6J6vYtkBmrt5En0s7GOQdnA&usqp=CAU",
+      note: "Tony Stark, is a fictional character primarily portrayed by Robert Downey Jr. in the Marvel Cinematic Universe ",
+    },
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>People Invited To My Party</h1>
+      <List people={people} />
+      <AddToList people={people} setPeople={setPeople} />
     </div>
   );
 }
